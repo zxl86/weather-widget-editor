@@ -1,0 +1,92 @@
+.weather-widget-editor {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.decoration-line {
+  height: 3px;
+  background-color: #3576cb;
+  margin-bottom: 0.4rem;
+}
+
+.editor-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  background-color: #f5f5f5;
+  border: 1px solid #d2d2d2;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.editing-area {
+  margin-right: 1.5rem;
+}
+
+.setting {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+.setting.title {
+  margin-bottom: 1rem;
+}
+
+.setting:last-child {
+  margin-bottom: 0;
+}
+
+.setting-name {
+  font-size: initial;
+  font-weight: initial;
+  margin: 0 0 0.5rem;
+}
+
+#title {
+  padding: 0.5rem 0.8rem;
+  border: 1px solid #d2d2d2;
+  border-radius: 3px;
+}
+
+.options {
+  display: flex;
+}
+
+.vertical-line {
+  width: 1px;
+  height: 10rem;
+  background-color: #d2d2d2;
+}
+
+.preview-area {
+  margin-left: 1.5rem;
+}
+
+.loading {
+  width: 13rem;
+  text-align: center;
+}
+
+/* this is an assumption since design for small screens is unavailable */
+@media only screen and (max-width: 600px) {
+  .editor-container {
+    flex-direction: column;
+  }
+
+  .editing-area {
+    margin-right: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .vertical-line {
+    height: 1px;
+    width: 85%;
+  }
+
+  .preview-area {
+    margin-left: 0;
+    margin-top: 1.5rem;
+  }
+}

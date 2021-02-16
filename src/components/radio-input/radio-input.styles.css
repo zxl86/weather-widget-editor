@@ -1,0 +1,57 @@
+.option {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Custom radio input */
+/* with help of this doc: https://www.w3schools.com/howto/howto_css_custom_checkbox.asp */
+.option input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.option .custom-radio {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid #d2d2d2;
+  border-radius: 50%;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.option label {
+  margin-left: 2rem;
+  cursor: pointer;
+}
+
+/* This is an assumption since no detail is provided */
+.option:hover .custom-radio {
+  border-color: #808080;
+}
+
+.option input:checked ~ .custom-radio {
+  background-color: #3576cb;
+  border: none;
+}
+
+.option .custom-radio::after {
+  content: '';
+  position: absolute;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background-color: #ffffff;
+  display: none;
+}
+
+.option input:checked ~ .custom-radio::after {
+  display: block;
+}
