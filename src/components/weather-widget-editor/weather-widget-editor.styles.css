@@ -1,3 +1,7 @@
+/* CSS values for properties like width, height, margin, border, etc. are estimates.
+Colors were got using color picker. Exact values are to be provided by UI/UX designer 
+via tools like InVision. */
+
 .weather-widget-editor {
   width: fit-content;
   margin: 0 auto;
@@ -48,6 +52,7 @@
   padding: 0.5rem 0.8rem;
   border: 1px solid #d2d2d2;
   border-radius: 3px;
+  color: #969696;
 }
 
 .options {
@@ -64,12 +69,7 @@
   margin-left: 1.5rem;
 }
 
-.loading {
-  width: 13rem;
-  text-align: center;
-}
-
-/* this is an assumption since design for small screens is unavailable */
+/* This is an assumption since design for small screens is unavailable */
 @media only screen and (max-width: 600px) {
   .editor-container {
     flex-direction: column;

@@ -2,9 +2,7 @@ import React from 'react';
 
 import './radio-input.styles.css';
 
-const RadioInput = (props) => {
-  const { id, name, value, defaultChecked, label } = props;
-
+const RadioInput = ({ id, name, value, defaultChecked, label }) => {
   return (
     <div className="option">
       <input

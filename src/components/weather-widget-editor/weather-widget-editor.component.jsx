@@ -1,35 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-
-import { getCurrCoordsStart } from '../../redux/weather/weather.actions';
+import React, { useState } from 'react';
 
 import RadioInput from '../radio-input/radio-input.component';
 import WeatherWidget from '../weather-widget/weather-widget.component';
 
 import './weather-widget-editor.styles.css';
 
-const WeatherWidgetEditor = ({ currentWeather, getCurrCoordsStart }) => {
+const WeatherWidgetEditor = () => {
   const [settings, setSettings] = useState({
     title: 'Title of widget',
     unit: 'metric',
     showWind: 'on',
   });
 
-  useEffect(() => {
-    getCurrCoordsStart();
-  }, [getCurrCoordsStart]);
-
   /* If a Submit or Save button was present in the design, the settings data could be saved to localStorage
   OR be sent to backend and saved into database if API is provided. Need to discuss and confirm with team 
-  members like PO, BA, UI/UX designer, senior devs. */
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    console.log(settings);
+  members like PO, BA, UI/UX designer, senior developers. */
+  const handleSubmit = (e) => {
+    e.preventDefault();
   };
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
     setSettings({ ...settings, [name]: value });
   };
@@ -44,6 +35,11 @@ const WeatherWidgetEditor = ({ currentWeather, getCurrCoordsStart }) => {
               <label className="setting-name" htmlFor="title">
                 Title
               </label>
+              {/* Not sure if "Title of widget" in the input field on the design is a placeholder or pre-filled content.
+              Its color is grey, which indicates it's a placeholder, but the actual title of the widget preview is the 
+              same. Since in React we should use controlled components, which means the actual title should be same as 
+              what's in the form input. So I assume it's pre-filled content, the color of which is grey. Need to discuss
+              and confirm with the designer. */}
               <input
                 type="text"
                 value={settings.title}
@@ -96,21 +92,11 @@ const WeatherWidgetEditor = ({ currentWeather, getCurrCoordsStart }) => {
         </div>
         <div className="vertical-line"></div>
         <div className="preview-area">
-          {!currentWeather ? (
-            <div className="loading">Loading...</div>
-          ) : (
-            <WeatherWidget {...settings} />
-          )}
+          <WeatherWidget {...settings} />
         </div>
       </div>
     </div>
   );
 };
 
-const mapStateToProps = ({ weather }) => ({
-  currentWeather: weather.currentWeather,
-});
-
-export default connect(mapStateToProps, { getCurrCoordsStart })(
-  WeatherWidgetEditor
-);
+export default WeatherWidgetEditor;

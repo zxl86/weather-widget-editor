@@ -1,3 +1,10 @@
+/* Styles of loading and error are assumptions. */
+.loading,
+.error {
+  width: 13rem;
+  text-align: center;
+}
+
 .weather-widget {
   background-color: #ffffff;
   padding: 2rem 1.5rem;

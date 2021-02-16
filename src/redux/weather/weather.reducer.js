@@ -7,7 +7,8 @@ const INITIAL_STATE = {
   isFetching: false,
 };
 
-const weatherReducer = (state = INITIAL_STATE, action) => {
+const weatherReducer = (reducerState, action) => {
+  const state = reducerState ?? INITIAL_STATE;
   switch (action.type) {
     case WeatherActionTypes.GET_CURR_COORDS_SUCCESS:
       return {

@@ -1,9 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+
+import { getCurrCoordsStart } from '../../redux/weather/weather.actions';
+
+import windDegToDirection from '../../utils/windDegToDirection';
 
 import './weather-widget.styles.css';
 
-const WeatherWidget = ({ title, unit, showWind, currentWeather }) => {
+const WeatherWidget = ({
+  title,
+  unit,
+  showWind,
+  currentWeather,
+  error,
+  getCurrCoordsStart,
+}) => {
+  useEffect(() => {
+    getCurrCoordsStart();
+  }, [getCurrCoordsStart]);
+
+  // A spinner may be better for loading. Need to confirm with the designer.
+  if (!currentWeather) {
+    return <div className="loading">Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="error">Error: {error}</div>;
+  }
+
   const {
     weather,
     name,
@@ -11,33 +35,9 @@ const WeatherWidget = ({ title, unit, showWind, currentWeather }) => {
     wind: { speed, deg },
   } = currentWeather;
 
-  const degToDirection = (deg) => {
-    const directions = [
-      'N',
-      'NNE',
-      'NE',
-      'ENE',
-      'E',
-      'ESE',
-      'SE',
-      'SSE',
-      'S',
-      'SSW',
-      'SW',
-      'WSW',
-      'W',
-      'WNW',
-      'NW',
-      'NNW',
-    ];
-    const index = Math.ceil((deg - 11.25) / 22.5);
-
-    return index > 15 ? directions[0] : directions[index];
-  };
-
   return (
     <div className="weather-widget">
-      <h1 className="widget-title">{title.toUpperCase()}</h1>
+      <h1 className="widget-title">{title?.toUpperCase()}</h1>
       <div className="widget-content">
         <img
           className="weather-icon"
@@ -56,7 +56,7 @@ const WeatherWidget = ({ title, unit, showWind, currentWeather }) => {
             <div className="wind">
               <span className="wind-label">Wind</span>
               <span className="wind-content">
-                {`${degToDirection(deg)} ${(speed * 3.6).toFixed(0)}km/h`}
+                {`${windDegToDirection(deg)} ${(speed * 3.6).toFixed(0)}km/h`}
               </span>
             </div>
           ) : null}
@@ -68,6 +68,7 @@ const WeatherWidget = ({ title, unit, showWind, currentWeather }) => {
 
 const mapStateToProps = ({ weather }) => ({
   currentWeather: weather.currentWeather,
+  error: weather.error,
 });
 
-export default connect(mapStateToProps)(WeatherWidget);
+export default connect(mapStateToProps, { getCurrCoordsStart })(WeatherWidget);
